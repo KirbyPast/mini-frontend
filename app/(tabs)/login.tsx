@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
 import { useRouter } from 'expo-router';
+import React, { useState } from 'react';
 import { ActivityIndicator, Alert, Button, StyleSheet, Text, TextInput, View } from 'react-native';
 
 const API_URL = 'http://172.23.48.1:8080/auth/login';
@@ -26,17 +26,19 @@ export default function LoginScreen() {
 
       const data = await response.json();
 
-      if (response.ok) {
-        Alert.alert('Success', `Welcome ${data.username} (${data.type})`);
+    // login.tsx (modification inside handleLogin)
+    if (response.ok) {
+      Alert.alert('Success', `Welcome ${data.username} (${data.type})`);
+      
+      const targetRoute = data.type === 'Customer' ? '/(tabs)/CustomerRide' : '/(tabs)/DriverRide';
 
-        router.replace({
-          pathname: '/(tabs)/RideWebSocket',
-          params: {
-            token: data.token,
-            username: data.username,
-            userType: data.type,
-          },
-        });
+      router.replace({
+        pathname: targetRoute,
+        params: {
+          token: data.token,
+          username: data.username,
+        },
+      });
       } else {
         Alert.alert('Login Failed', data.error || 'Unknown error');
       }
