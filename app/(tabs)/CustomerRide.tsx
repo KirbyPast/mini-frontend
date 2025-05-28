@@ -17,7 +17,7 @@ export default function CustomerRide() {
         'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ start, end }),
+      body: JSON.stringify({ start, end, type: 'economy'}),
     })
       .then((res) => {
         if (!res.ok) throw new Error(`HTTP ${res.status}`);

@@ -24,7 +24,7 @@ export default function DriverRide() {
   const stompClient = useRef<Client | null>(null);
   const [incomingRequest, setIncomingRequest] = useState<IncomingRideRequest | null>(null);
 
-  const driverId = '639597134436051';
+  const driverId = 'sf1';
 
   useEffect(() => {
     const client = new Client({
